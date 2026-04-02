@@ -1,10 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 from flask_bcrypt import Bcrypt
+from dotenv import load_dotenv
+import os
+from groq import Groq
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key_123"
 bcrypt = Bcrypt(app)
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def init_db():
     conn = sqlite3.connect("users.db")
@@ -74,7 +80,45 @@ def login():
 def dashboard():
     if "user_id" not in session:
         return redirect(url_for("login"))
-    return f"Welcome {session['user_name']}! 🎉 Your dashboard is coming soon!"
+
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+    user = cursor.fetchone()
+    conn.close()
+
+    return render_template("dashboard.html", user=user)
+
+@app.route("/generate", methods=["POST"])
+def generate():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+    user = cursor.fetchone()
+    conn.close()
+
+    prompt = f"""
+    Create a personalized 7-day workout plan for:
+    - Name: {user[1]}
+    - Age: {user[4]}
+    - Weight: {user[5]}kg
+    - Fitness Goal: {user[6]}
+    - Fitness Level: {user[7]}
+
+    Make it detailed, motivating and easy to follow.
+    """
+
+    chat_completion = client.chat.completions.create(
+        messages=[{"role": "user", "content": prompt}],
+        model="llama-3.3-70b-versatile",
+    )
+
+    workout_plan = chat_completion.choices[0].message.content
+
+    return render_template("dashboard.html", user=user, workout_plan=workout_plan)
 
 @app.route("/logout")
 def logout():
