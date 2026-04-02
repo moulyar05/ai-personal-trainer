@@ -1,24 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>AI Personal Trainer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            min-height: 100vh;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .navbar {
+            background: rgba(0,0,0,0.4) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.6);
+            max-width: 550px;
+            margin: 20px auto;
+            line-height: 1.8;
+        }
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 45px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+            color: white;
+        }
+        .btn-secondary-custom {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 15px 45px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, border-color 0.2s;
+            margin-left: 15px;
+        }
+        .btn-secondary-custom:hover {
+            transform: translateY(-3px);
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        .features {
+            padding: 80px 20px;
+            background: rgba(0,0,0,0.2);
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00d4ff;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .feature-card h5 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #00d4ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .badge-pill {
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">💪 AI Personal Trainer</a>
+<!-- Navbar -->
+<nav class="navbar navbar-dark px-4 d-flex justify-content-between">
+    <a class="navbar-brand fw-bold" href="#">💪 AI Personal Trainer</a>
+    <div>
+        <a href="/login" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2">Login</a>
+        <a href="/register" class="btn btn-sm rounded-pill px-3" style="background:#00d4ff; color:white; border:none;">Get Started</a>
     </div>
 </nav>
 
-<div class="container text-center mt-5">
-    <h1 class="display-4 fw-bold">Your Personal AI Trainer</h1>
-    <p class="lead text-muted mt-3">
-        Get a personalized workout plan generated just for you using AI!
-    </p>
-    <a href="/register" class="btn btn-dark btn-lg mt-3">Get Started 🚀</a>
+<!-- Hero Section -->
+<div class="hero">
+    <div>
+        <div class="badge-pill">⚡ Powered by Groq AI</div>
+        <h1 class="hero-title">Your Personal<br>AI Fitness Coach</h1>
+        <p class="hero-subtitle">
+            Get a fully personalized workout plan generated by AI — tailored to your age, weight, fitness level and goals. 100% free.
+        </p>
+        <div class="mt-4">
+            <a href="/register" class="btn-primary-custom">Get Started 🚀</a>
+            <a href="/login" class="btn-secondary-custom">Login</a>
+        </div>
+    </div>
 </div>
+
+<!-- Features Section -->
+<div class="features">
+    <div class="container">
+        <p class="section-title">Why AI Personal Trainer?</p>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h5>AI Generated Plans</h5>
+                    <p>Get a personalized 7-day workout plan created just for you based on your unique fitness profile.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h5>Goal Focused</h5>
+                    <p>Whether you want to lose weight, build muscle or improve endurance — your plan is built around your goal.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h5>Instant Results</h5>
+                    <p>No waiting. Get your complete personalized workout plan generated in seconds powered by Groq AI.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    Built by Moulya 💙 | AI Personal Trainer © 2026
+</footer>
 
 </body>
 </html>
